@@ -3,13 +3,13 @@
 // @namespace    HFST
 // @version      0.1
 // @description  HackForums Safe Trader
-// @author       Lrrr
-// @require      http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
-// @grant      GM_setValue
-// @grant      GM_getValue
-// @grant      GM_deleteValue
-// @grant      GM_listValues
-// @grant      GM_log
+// @author       Red Lions
+// @require      https://code.jquery.com/jquery-2.2.4.min.js
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        GM_deleteValue
+// @grant        GM_listValues
+// @grant        GM_log
 // @include      *hackforums.net/*
 // ==/UserScript==
 
@@ -34,11 +34,9 @@ if(!GM_getValue("uname")) { GM_setValue("uname", $("#panel a").first().text()); 
         $(".post_author .largetext").each(function(){
             pb_ids.push($(this).find('a').attr('href').replace(/[^0-9]/g, ''));
         });
-        var x = 0;
-        $(".post_author").each(function(){
+        $(".post_author").each(function(x){
             $(this).prepend("<a name='#"+pb_ids[x]+"'></a>"); //page scrolls, needs fixed.
             $(this).append("<br><span id='hfst-quickScan'><a href='#"+pb_ids[x]+"' id='"+pb_ids[x]+"'>Quick Scan</a></span>");
-            x++;
         });
         $("#hfst-quickScan a").click(function(){
             var sRes = quickScan($(this).attr('id'));
