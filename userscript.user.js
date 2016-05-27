@@ -46,7 +46,12 @@ var quickScan = {
             uid = $(this).find("a").attr("href").substr(52);
             $(this).append("<br><span class='hfst-quickScan'><a data-uid='" + uid + "'>Quick Scan</a></span>");
         });
+    },
 
+    bindEvents: function() {
+        $("body").on("click", ".hfst-quickScan a", function() {
+            quickScan.doScan($(this).attr("data-uid"));
+        });
     },
 
     doScan: function(uid) {
@@ -64,15 +69,62 @@ var quickScan = {
 
 };
 
+
+var contactALion = {
+
+    appendCSS: function() {
+        var css = ".contactALion { cursor: pointer; font-size: 11px; } #popup_contactALion { background-color: rgb(51, 51, 51); bottom: auto; border: 1px solid rgb(0, 0, 0); height: 30%; left: 182px; margin: 0px; max-height: 95%; max-width: 95%; opacity: 1; overflow: auto; padding: 0px; position: fixed; right: auto; top: 128px; width: 75%; z-index: 999; display: none; }";
+        $("body").append("<style>" + css + "</style>");
+    },
+
+    appendContactBox: function() {
+        var contactBox = "<div id='popup_contactALion'><h3>You can contact a member of the prestigious Red Lions group from here.</h3><div>Online members: <span class='contactbox_online'>...</span> (click on one)</div><br><div class='pm_template'>What do you need help with?<br><input type='text' id='contactbox_problem'/></div><br><br><div class='contact_btn'><button class='button cancel_contact'>Cancel and close</button> <button class='button send_contact'>Send!</button></div></div>";
+
+        $("#content .navigation").prepend("<div class='contactALion'>I need help!</div>");
+        $("body").append(contactBox);
+    },
+
+    bindEvents: function() {
+        $("body").on("click", ".contactALion", function() {
+            $("#popup_contactALion").css("display", "block");
+        });
+
+        $("body").on("click", ".cancel_contact", function() {
+            $("#popup_contactALion").css("display", "none");
+        });
+
+        $("body").on("click", ".send_contact", function() {
+            contactALion.sendPM("guy chosen", $("#contactbox_problem").val());
+        });
+    },
+
+
+    fetchOnlineMembers: function() {
+
+        
+
+    },
+
+
+    sendPM: function() {
+
+
+    },
+
+};
+
 (function() {
     if(cpage=="showthread") {
         /* Actions */
         quickScan.appendCSS();
         quickScan.appendEachPost();
-
-        /* Events binds */
-        $(".hfst-quickScan a").click(function() {
-            quickScan.doScan($(this).attr("data-uid"));
-        });
+        quickScan.bindEvents();
     }
+
+
+    contactALion.appendCSS();
+    contactALion.appendContactBox();
+    contactALion.bindEvents();
+
+
 })();
