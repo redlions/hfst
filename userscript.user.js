@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HFST
 // @namespace    HFST
-// @version      0.0.1
+// @version      0.1.1
 // @description  HackForums Safe Trader
 // @author       Red Lions - Lrr, Hash G.,
 // @require      https://code.jquery.com/jquery-2.2.4.min.js
@@ -79,8 +79,9 @@ var quickScan = {
      * Display the quick scan
     */
     displayScan: function(data, uid) {
-        alert(data);
-        $("a[data-uid='" + uid + "']").html("Quick Scan -- Done for " + uid);
+        //alert(data);
+        //$("a[data-uid='" + uid + "']").html("Quick Scan -- Done for " + uid);
+        $("a[data-uid='" + uid + "']").html(data);
     },
 
 };
